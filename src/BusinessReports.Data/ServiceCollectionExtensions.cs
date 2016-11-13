@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using BusinessReports.Entity.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
 
 namespace BusinessReports.Data
 {
@@ -16,17 +17,33 @@ namespace BusinessReports.Data
     {
         public static IServiceCollection AddBusinessReportsDataAccess(this IServiceCollection services, IConfigurationRoot config)
         {
-            services.AddDbContext<BusinessReportsDbContext>(options =>
-                options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            services.AddEntityFrameworkSqlServer().AddDbContext<BusinessReportsDbContext>((serviceProvider, options) =>
+                options.UseSqlServer(config.GetConnectionString("DefaultConnection")).UseInternalServiceProvider(serviceProvider));
+            services.AddOptions();
+
+            //services.AddDbContext<BusinessReportsDbContext>(options =>
+            //    options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<BusinessReportsDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient<BusinessReportsInitializer>();
+           //services.AddTransient<BusinessReportsInitializer>();
 
             services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
             return services;
+        }
+
+        public static IApplicationBuilder UseBusinessReportsDataAccess(this IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                //serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().Database.EnsureCreated();
+                serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().Database.Migrate();
+                //serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().EnsureSeedData();
+            }
+
+            return app;
         }
     }
 }

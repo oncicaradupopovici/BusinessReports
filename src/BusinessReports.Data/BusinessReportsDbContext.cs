@@ -50,10 +50,10 @@ namespace BusinessReports.Data
             }
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
-            base.OnConfiguring(optionsBuilder);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
+        //    base.OnConfiguring(optionsBuilder);
+        //}
     }
 }

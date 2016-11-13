@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
-import { Country } from './country'
+import { Country } from './country';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class CountryService {
-    private _apiUrl: string = 'http://localhost:5000/api/country';
+    private _apiUrl: string = environment.apiUrl + '/country';
 
     constructor(private http: Http) {
     }

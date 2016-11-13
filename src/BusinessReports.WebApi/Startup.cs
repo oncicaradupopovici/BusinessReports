@@ -84,11 +84,13 @@ namespace BusinessReports.WebApi
 
             app.UseMvc();
 
-            using (var scope = scopeFactory.CreateScope())
-            {
-                var initializer = scope.ServiceProvider.GetService<BusinessReportsInitializer>();
-                initializer.SeedAsync().Wait();
-            }
+            app.UseBusinessReportsDataAccess();
+
+            //using (var scope = scopeFactory.CreateScope())
+            //{
+            //    var initializer = scope.ServiceProvider.GetService<BusinessReportsInitializer>();
+            //    initializer.SeedAsync().Wait();
+            //}
         }
     }
 }
