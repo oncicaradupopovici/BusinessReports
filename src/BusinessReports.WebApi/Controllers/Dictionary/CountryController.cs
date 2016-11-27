@@ -67,11 +67,11 @@ namespace BusinessReports.WebApi.Controllers.Api.Dictionary
                 return BadRequest();
             }
 
-            var item = _crudSvc.Get(country.Id);
-            if (item == null)
-            {
-                return NotFound();
-            }
+            //var item = _crudSvc.Get(country.Id);
+            //if (item == null)
+            //{
+            //    return NotFound();
+            //}
 
             try
             {

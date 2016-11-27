@@ -14,14 +14,11 @@ namespace BusinessReports.Data
 {
     public class BusinessReportsDbContext : IdentityDbContext<User>
     {
-        private IConfigurationRoot _config;
-
         public DbSet<Country> Countries { get; set; }
 
-        public BusinessReportsDbContext(DbContextOptions<BusinessReportsDbContext> options, IConfigurationRoot config)
+        public BusinessReportsDbContext(DbContextOptions<BusinessReportsDbContext> options)
             : base(options)
         {
-            _config = config;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -14,7 +14,7 @@ namespace BusinessReports.Data.Repository
         where T : class, IdEntity, new()
     {
 
-        protected readonly BusinessReportsDbContext _c;
+        protected readonly DbContext _c;
 
         public Repo(BusinessReportsDbContext c)
         {
@@ -32,7 +32,13 @@ namespace BusinessReports.Data.Repository
 
         public T Get(int id)
         {
-            return _c.Set<T>().FirstOrDefault(e=> e.Id == id);
+            // _c.Set<T>().AsNoTracking();
+            return _c.Set<T>().FirstOrDefault(e => e.Id == id);
+        }
+
+        public virtual IQueryable<T> GetAll()
+        {
+            return _c.Set<T>();
         }
 
         public virtual IQueryable<T> Where(Expression<Func<T, bool>> predicate)
@@ -73,25 +79,26 @@ namespace BusinessReports.Data.Repository
         //    return q;
         //}
 
-        public virtual IQueryable<T> GetAll()
-        {
-            return _c.Set<T>();
-        }
 
-        public T Insert(T o)
+        public T Insert(T entity)
         {
-            _c.Set<T>().Add(o);
-            return o;
+            _c.Add<T>(entity);
+            //_c.Set<T>().Add(entity);
+            return entity;
         }
 
         public void InsertBulk(IEnumerable<T> enities)
         {
-            _c.Set<T>().AddRange(enities);
+            _c.AddRange(enities);
+            //_c.Set<T>().AddRange(enities);
         }
 
         public void Update(T entity)
         {
-            _c.Entry<T>(entity).State = EntityState.Modified;
+            
+            _c.Update<T>(entity);
+            //_c.Set<T>().Update(entity);
+            //_c.Entry<T>(entity).State = EntityState.Modified;
         }
 
         //public void UpdateGraph(T entity, IEnumerable<string> navigationProperties = null)
@@ -149,9 +156,10 @@ namespace BusinessReports.Data.Repository
 
         //}
 
-        public virtual void Delete(T o)
+        public virtual void Delete(T entity)
         {
-            _c.Set<T>().Remove(o);
+            _c.Remove<T>(entity);
+            //_c.Set<T>().Remove(entity);
         }
 
         public void Save()
