@@ -7,19 +7,21 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class CountryService {
-    private _apiUrl: string = environment.apiUrl + '/country';
+    private _apiUrl: string = environment.apiUrl + '/countries';
 
     constructor(private http: Http) {
     }
 
     public get(id: number): Observable<Country> {
         return this.http.get(`${this._apiUrl}/${id}`) // ...using get request
+            .share()
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     }
 
     public getList(): Observable<Country[]> {
         return this.http.get(this._apiUrl)
+            .share()
             .map((res: Response) => res.json())
             .catch(this.handleError); //...errors if any
     }
@@ -30,6 +32,7 @@ export class CountryService {
         let bodyString = JSON.stringify(document); // Stringify payload
 
         return this.http.post(this._apiUrl, bodyString, options)
+            .share()
             .catch(this.handleError); //...errors if any
 
     }
@@ -41,12 +44,14 @@ export class CountryService {
 
         return this.http.put(this._apiUrl, bodyString, options)
             //.map((res: Response) => res.json()) // ...and calling .json() on the response to return data
+            .share()
             .catch(this.handleError); //...errors if any
     }
 
     public delete(id: number): Observable<any> {
         return this.http.delete(`${this._apiUrl}/${id}`) // ...using put request
-            .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
+            //.map((res: Response) => res.json()) // ...and calling .json() on the response to return data
+            .share()
             .catch(this.handleError); //...errors if any
     }
 

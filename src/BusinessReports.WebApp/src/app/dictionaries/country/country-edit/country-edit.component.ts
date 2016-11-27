@@ -34,7 +34,7 @@ export class CountryEditComponent implements OnInit {
     }
 
     loadModelForId(id: number): Observable<Country> {
-        var obs = this._crudService.get(id);
+        let obs = this._crudService.get(id);
         obs.subscribe(
             e => {
                 this.model = e;
@@ -43,7 +43,6 @@ export class CountryEditComponent implements OnInit {
             err => console.log(err)
         );
         return obs;
-
     }
 
     hookModel() {
