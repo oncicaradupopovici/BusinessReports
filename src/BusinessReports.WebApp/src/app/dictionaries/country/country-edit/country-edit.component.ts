@@ -1,7 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnInit, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {NgForm} from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 import { Country } from '../country';
 import { CountryService } from '../country.service';
-import { Observable } from 'rxjs/Observable';
+
+
 //declare var $: JQueryStatic;
 
 @Component({
@@ -15,11 +18,13 @@ export class CountryEditComponent implements OnInit {
 
     @Output() onAfterSave = new EventEmitter();
 
-    // Reset the form with a new hero AND restore 'pristine' class state
-    // by toggling 'active' flag which causes the form
-    // to be removed/re-added in a tick via NgIf
-    // TODO: Workaround until NgForm has a reset method (#6822)
-    active = true;
+    // // Reset the form with a new hero AND restore 'pristine' class state
+    // // by toggling 'active' flag which causes the form
+    // // to be removed/re-added in a tick via NgIf
+    // // TODO: Workaround until NgForm has a reset method (#6822)
+    // active = true;
+
+    @ViewChild('form') _form : NgForm;
 
     constructor(private _crudService: CountryService, private _elementRef: ElementRef) {
     }
@@ -28,25 +33,29 @@ export class CountryEditComponent implements OnInit {
         this.newModel();
     }
 
+    afterModelHooked() {
+        this.resetForm();
+    }
+
+    setModel(model: Country){
+        
+        this.model = model;
+        this.afterModelHooked();
+    }
+
     newModel() {
-        this.model = new Country();
-        this.hookModel();
+        this.setModel(new Country());
     }
 
     loadModelForId(id: number): Observable<Country> {
         let obs = this._crudService.get(id);
         obs.subscribe(
             e => {
-                this.model = e;
-                this.hookModel();
+                this.setModel(e);
             },
             err => console.log(err)
         );
         return obs;
-    }
-
-    hookModel() {
-        this.resetValidators();
     }
 
     save() {
@@ -73,9 +82,8 @@ export class CountryEditComponent implements OnInit {
         $(this._elementRef.nativeElement).find('#editWindow').modal('show');
     }
 
-    resetValidators() {
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
+    resetForm() {
+        this._form.reset(this.model);
     }
 
     log(whatever: any) {

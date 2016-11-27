@@ -8,7 +8,7 @@
                 <h4 class="modal-title" id="myModalLabel">Edit Country</h4>
             </div>
             <div class="modal-body">
-                <form #form="ngForm" *ngIf="active" novalidate>
+                <form #form="ngForm" novalidate>
                     <div class="form-group" [ngClass]="{'has-danger': name.invalid && name.touched}">
                         <label for="name" class="form-control-label">Name</label>
                         <input type="text" class="form-control" [ngClass]="{'form-control-danger': name.invalid && name.touched}" id="name" name="name" placeholder=""
