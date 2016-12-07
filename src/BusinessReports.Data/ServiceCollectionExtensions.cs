@@ -1,5 +1,4 @@
 ﻿using BusinessReports.Data.Repository;
-using BusinessReports.Data.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using BusinessReports.Entity.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
+using Avocado.Data.Contracts;
 
 namespace BusinessReports.Data
 {
@@ -18,7 +18,9 @@ namespace BusinessReports.Data
         public static IServiceCollection AddBusinessReportsDataAccess(this IServiceCollection services, IConfigurationRoot config)
         {
             services.AddEntityFrameworkSqlServer().AddDbContext<BusinessReportsDbContext>((serviceProvider, options) =>
-                options.UseSqlServer(config.GetConnectionString("DefaultConnection")).UseInternalServiceProvider(serviceProvider));
+                options
+                    .UseSqlServer(config.GetConnectionString("DefaultConnection"))
+                    .UseInternalServiceProvider(serviceProvider));
             services.AddOptions();
 
             //services.AddDbContext<BusinessReportsDbContext>(options =>
@@ -30,7 +32,7 @@ namespace BusinessReports.Data
 
            //services.AddTransient<BusinessReportsInitializer>();
 
-            services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
+            services.AddScoped(typeof(IRepository<>), typeof(BusinessReportRepository<>));
             return services;
         }
 

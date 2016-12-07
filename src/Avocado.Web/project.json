@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Avocado.Core": "1.0.0-*",
+    "Avocado.Entity": "1.0.0-*",
+    "Avocado.Service": "1.0.0-*",
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
+    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
+    "NETStandard.Library": "1.6.0",
+    "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.1.2"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

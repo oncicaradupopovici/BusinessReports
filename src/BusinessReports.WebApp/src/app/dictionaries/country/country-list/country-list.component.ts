@@ -1,47 +1,25 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { BaseListComponent} from '../../../avocado';
+
+import { CountryEditComponent } from '../country-edit/country-edit.component';
 import { Country } from '../country';
 import { CountryService } from '../country.service';
-import { CountryEditComponent } from '../country-edit/country-edit.component';
 
 @Component({
-  selector: 'app-country-list',
+  selector: 'country-list',
   templateUrl: './country-list.component.html',
-  styleUrls: ['./country-list.component.css'],
-  providers: [CountryService]
+  styleUrls: ['./country-list.component.css']
 })
-export class CountryListComponent implements OnInit {
-    public list: Country[];
-    public currentPageNo: number;
-    public pageSize: number;
-    public currentEd
-    @ViewChild(CountryEditComponent) editComponent: CountryEditComponent
+export class CountryListComponent extends BaseListComponent<Country> {
 
-    constructor(private _crudService: CountryService) {
-
+    constructor(slimLoadingBarService: SlimLoadingBarService, modalService: NgbModal, crudService: CountryService) {
+        super(slimLoadingBarService, modalService, crudService)
     }
 
-    ngOnInit() {
-        this.loadData();
-    }
-
-    loadData() {
-        this._crudService.getList().subscribe(
-            data => this.list = data,
-            err => console.log(err)
-        );
-    }
-
-    onAfterEditComponentSaved() {
-        this.loadData();
-    }
-
-    showAdd() {
-        this.editComponent.newModel();
-        this.editComponent.show();
-    }
-
-    showEdit(id: number) {
-        this.editComponent.loadModelForId(id)
-            .subscribe(c => this.editComponent.show());
+    protected getEditComponentType(): any {
+        return CountryEditComponent;
     }
 }

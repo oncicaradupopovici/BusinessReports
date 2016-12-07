@@ -2,6 +2,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Avocado.Service": "1.0.0-*",
     "BusinessReports.Core": "1.0.0-*",
     "BusinessReports.Data": "1.0.0-*",
     "BusinessReports.Entity": "1.0.0-*",

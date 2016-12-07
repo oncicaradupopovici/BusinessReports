@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Avocado.Core;
+using Avocado.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessReports.WebApi.Models.Dictionary
 {
-    public class Country
+    public class Country : IModel, IdAccessor
     {
         public int Id { get; set; }
         [Required]

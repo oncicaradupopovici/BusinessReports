@@ -1,4 +1,4 @@
-﻿using BusinessReports.Entity.Dictionaries;
+﻿using BusinessReports.Entity.Dictionary;
 using BusinessReports.Entity.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;

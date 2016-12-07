@@ -15,7 +15,7 @@ import { environment } from '../../../environments/environment';
 export var CountryService = (function () {
     function CountryService(http) {
         this.http = http;
-        this._apiUrl = environment.apiUrl + '/countries';
+        this._apiUrl = environment.apiUrl + '/country';
     }
     CountryService.prototype.get = function (id) {
         return this.http.get(this._apiUrl + "/" + id) // ...using get request
@@ -41,7 +41,7 @@ export var CountryService = (function () {
         var headers = new Headers({ 'Content-Type': 'application/json' });
         var options = new RequestOptions({ headers: headers });
         var bodyString = JSON.stringify(document); // Stringify payload
-        return this.http.put(this._apiUrl, bodyString, options)
+        return this.http.put(this._apiUrl + "/" + document.id, bodyString, options)
             .share()
             .catch(this.handleError); //...errors if any
     };

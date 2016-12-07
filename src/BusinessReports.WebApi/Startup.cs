@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -13,11 +14,9 @@ using AutoMapper;
 using BusinessReports.Service;
 using BusinessReports.Data;
 using System.Net;
-using Microsoft.AspNet.Diagnostics;
-using Microsoft.AspNet.Http;
-using BusinessReports.WebApi.Extensions;
-using Microsoft.AspNet.Http.Features;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Diagnostics;
+using Avocado.Web.ActionFilters;
+using Avocado.Web.Consts;
 
 namespace BusinessReports.WebApi
 {
@@ -41,11 +40,16 @@ namespace BusinessReports.WebApi
         {
             services.AddSingleton(_configuration);
             services.AddCors();
-            services.AddMvc().AddJsonOptions(opts =>
-            {
-                // Force Camel Case to JSON
-                opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            });
+            services.AddMvc()
+                .AddJsonOptions(opts =>
+                {
+                    // Force Camel Case to JSON
+                    opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                })
+                .AddMvcOptions(options =>
+                {
+                    options.Filters.Add(new ValidateModelActionFilter());
+                });
             services.AddAutoMapper(Assembly.GetEntryAssembly());
             services.AddBusinessReportsDataAccess(_configuration);
             services.AddBusinessReportServices();
@@ -62,7 +66,9 @@ namespace BusinessReports.WebApi
             app.UseCors(builder =>
                 builder.AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod());
+                .AllowAnyMethod()
+                .WithExposedHeaders(Headers.PaginationHeader)
+            );
 
             app.UseExceptionHandler(
               builder =>
@@ -71,13 +77,12 @@ namespace BusinessReports.WebApi
                     async context =>
                     {
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                        //context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
 
                         var error = context.Features.Get<IExceptionHandlerFeature>();
                         if (error != null)
                         {
-                            context.Response.AddApplicationError(error.Error.Message);
-                            await context.Response.WriteAsync(error.Error.Message).ConfigureAwait(false);
+                            await context.Response.WriteAsync(error.Error.ToString()).ConfigureAwait(false);
                         }
                     });
               });

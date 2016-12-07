@@ -13,10 +13,10 @@ namespace BusinessReports.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
+                .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BusinessReports.Entity.Dictionaries.Country", b =>
+            modelBuilder.Entity("BusinessReports.Entity.Dictionary.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -35,6 +35,31 @@ namespace BusinessReports.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("BusinessReports.Entity.Dictionary.County", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
+
+                    b.Property<int>("CountryId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Counties");
                 });
 
             modelBuilder.Entity("BusinessReports.Entity.Identity.User", b =>
@@ -191,6 +216,14 @@ namespace BusinessReports.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserTokens");
+                });
+
+            modelBuilder.Entity("BusinessReports.Entity.Dictionary.County", b =>
+                {
+                    b.HasOne("BusinessReports.Entity.Dictionary.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

@@ -1,0 +1,8 @@
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="Search for..." #term (keyup)="onSearchKeyUp(term.value)">
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="emitSearch(term.value)">
+            <i class="fa fa-search"></i>
+        </button>
+    </span>
+</div>
