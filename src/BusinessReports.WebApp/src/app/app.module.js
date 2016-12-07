@@ -9,14 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { AppComponent } from './app.component';
-import { DictionariesComponent } from './dictionaries/dictionaries.component';
-import { CountryListComponent } from './dictionaries/country/country-list/country-list.component';
-import { CountryEditComponent } from './dictionaries/country/country-edit/country-edit.component';
 import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DictionariesModule } from './dictionaries/dictionaries.module';
 export var AppModule = (function () {
     function AppModule() {
     }
@@ -24,29 +23,15 @@ export var AppModule = (function () {
         NgModule({
             declarations: [
                 AppComponent,
-                DictionariesComponent,
-                CountryListComponent,
-                CountryEditComponent,
                 HomeComponent
             ],
             imports: [
                 BrowserModule,
-                FormsModule,
                 HttpModule,
-                RouterModule.forRoot([
-                    {
-                        path: '',
-                        component: HomeComponent
-                    },
-                    {
-                        path: 'dictionaries',
-                        component: DictionariesComponent,
-                        children: [
-                            { path: '', redirectTo: 'country-list', pathMatch: 'full' },
-                            { path: 'country-list', component: CountryListComponent }
-                        ]
-                    }
-                ])
+                NgbModule.forRoot(),
+                SlimLoadingBarModule.forRoot(),
+                AppRoutingModule,
+                DictionariesModule
             ],
             providers: [],
             bootstrap: [AppComponent]

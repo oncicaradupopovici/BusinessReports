@@ -1,3 +1,8 @@
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -7,45 +12,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, ViewChild } from '@angular/core';
-import { CountryService } from '../country.service';
+import { Component } from '@angular/core';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BaseListComponent } from '../../../avocado';
 import { CountryEditComponent } from '../country-edit/country-edit.component';
-export var CountryListComponent = (function () {
-    function CountryListComponent(_crudService) {
-        this._crudService = _crudService;
+import { CountryService } from '../country.service';
+export var CountryListComponent = (function (_super) {
+    __extends(CountryListComponent, _super);
+    function CountryListComponent(slimLoadingBarService, modalService, crudService) {
+        _super.call(this, slimLoadingBarService, modalService, crudService);
     }
-    CountryListComponent.prototype.ngOnInit = function () {
-        this.loadData();
+    CountryListComponent.prototype.getEditComponentType = function () {
+        return CountryEditComponent;
     };
-    CountryListComponent.prototype.loadData = function () {
-        var _this = this;
-        this._crudService.getList().subscribe(function (data) { return _this.list = data; }, function (err) { return console.log(err); });
-    };
-    CountryListComponent.prototype.onAfterEditComponentSaved = function () {
-        this.loadData();
-    };
-    CountryListComponent.prototype.showAdd = function () {
-        this.editComponent.newModel();
-        this.editComponent.show();
-    };
-    CountryListComponent.prototype.showEdit = function (id) {
-        var _this = this;
-        this.editComponent.loadModelForId(id)
-            .subscribe(function (c) { return _this.editComponent.show(); });
-    };
-    __decorate([
-        ViewChild(CountryEditComponent), 
-        __metadata('design:type', CountryEditComponent)
-    ], CountryListComponent.prototype, "editComponent", void 0);
     CountryListComponent = __decorate([
         Component({
-            selector: 'app-country-list',
+            selector: 'country-list',
             templateUrl: './country-list.component.html',
-            styleUrls: ['./country-list.component.css'],
-            providers: [CountryService]
+            styleUrls: ['./country-list.component.css']
         }), 
-        __metadata('design:paramtypes', [CountryService])
+        __metadata('design:paramtypes', [SlimLoadingBarService, NgbModal, CountryService])
     ], CountryListComponent);
     return CountryListComponent;
-}());
+}(BaseListComponent));
 //# sourceMappingURL=D:/Git/BusinessReports/src/BusinessReports.WebApp/src/app/dictionaries/country/country-list/country-list.component.js.map

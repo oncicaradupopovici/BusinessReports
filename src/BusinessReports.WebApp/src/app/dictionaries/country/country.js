@@ -1,8 +1,5 @@
 export var Country = (function () {
-    function Country(id, code, name) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
+    function Country() {
     }
     return Country;
 }());
