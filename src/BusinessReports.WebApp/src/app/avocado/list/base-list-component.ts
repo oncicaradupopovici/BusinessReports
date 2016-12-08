@@ -21,7 +21,7 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
         this.loadPage(1);
     }
 
-    public loadPage(page: number) {
+    public loadPage(page: number, scrollTop: boolean = false) {
         this.slimLoadingBarService.start();
         this.crudService.getPage(this.searchTerm, page, this.pageSize).subscribe(
             result => {
@@ -29,7 +29,9 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
                 this.page = result.pageInfo.page;
                 this.totalCount = result.pageInfo.totalCount;
 
-                window.scrollTo(0, 0);
+                if (scrollTop)
+                    $('html,body').animate({ scrollTop: 0 }, 400);
+
                 this.slimLoadingBarService.complete();
             },
             err => console.log(err)

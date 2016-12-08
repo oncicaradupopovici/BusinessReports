@@ -12,14 +12,16 @@ export var BaseListComponent = (function () {
     BaseListComponent.prototype.ngOnInit = function () {
         this.loadPage(1);
     };
-    BaseListComponent.prototype.loadPage = function (page) {
+    BaseListComponent.prototype.loadPage = function (page, scrollTop) {
         var _this = this;
+        if (scrollTop === void 0) { scrollTop = false; }
         this.slimLoadingBarService.start();
         this.crudService.getPage(this.searchTerm, page, this.pageSize).subscribe(function (result) {
             _this.list = result.data;
             _this.page = result.pageInfo.page;
             _this.totalCount = result.pageInfo.totalCount;
-            window.scrollTo(0, 0);
+            if (scrollTop)
+                $('html,body').animate({ scrollTop: 0 }, 400);
             _this.slimLoadingBarService.complete();
         }, function (err) { return console.log(err); });
     };
