@@ -69,6 +69,14 @@ namespace Avocado.Web.Controllers
             return data;
         }
 
+        [HttpGet("select")]
+        public async Task<IEnumerable<SelectListItem>> GetSelectList()
+        {
+            var query = this._crudSvc.GetAll().ProjectTo<SelectListItem>();
+            var data = await query.ToListAsync();
+            return data;
+        }
+
 
         [HttpGet("{id}"/*, Name = "GetItem"*/)]
         public async Task<IActionResult> GetSingleAsync(int id)

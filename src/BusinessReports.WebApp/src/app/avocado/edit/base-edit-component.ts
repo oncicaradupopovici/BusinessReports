@@ -2,7 +2,9 @@
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { IModel } from '../interfaces';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
+import { IModel, ApiError } from '../interfaces';
 
 export abstract class BaseEditComponent<TModel extends IModel> implements OnInit {
 
@@ -13,7 +15,9 @@ export abstract class BaseEditComponent<TModel extends IModel> implements OnInit
 
     constructor(
         private activeModal: NgbActiveModal,
-        private crudService: any) {
+        protected toastr: ToastsManager,
+        private crudService: any
+    ) {
     }
 
     public ngOnInit() {
@@ -29,7 +33,9 @@ export abstract class BaseEditComponent<TModel extends IModel> implements OnInit
             e => {
                 this.setModel(e);
             },
-            err => console.log(err)
+            err => {
+                this.handleApiError(err);
+            }
         );
         return obs;
     }
@@ -43,10 +49,13 @@ export abstract class BaseEditComponent<TModel extends IModel> implements OnInit
 
         asyncOperation.subscribe(
             a => {
+                this.toastr.success("Saved successfully", "Success");
                 this.close();
                 this.onAfterSave.emit();
             },
-            err => console.log(err)
+            err => {
+                this.handleApiError(err);
+            }
         );
     }
 
@@ -69,5 +78,14 @@ export abstract class BaseEditComponent<TModel extends IModel> implements OnInit
     private resetForm() {
         if (this.form != null)
             this.form.reset(this.model);
+    }
+
+    protected handleApiError(err: ApiError) {
+        if (err.isValidationError()) {
+            this.toastr.error(err.getFriendlyValidation(), err.getFriendlyMessage(), { enableHTML: true, dismiss: 'click' });
+        }
+        else {
+            this.toastr.error(err.getFriendlyMessage(), err.getFriendlyStatus(), { dismiss: 'click' });
+        }
     }
 }

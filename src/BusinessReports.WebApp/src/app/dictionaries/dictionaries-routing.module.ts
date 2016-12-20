@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DictionariesComponent } from './dictionaries.component';
 import { CountryListComponent } from './country/country-list/country-list.component';
+import { CountyListComponent } from './county/county-list/county-list.component';
+import { CityListComponent } from './city/city-list/city-list.component';
 
 const dictionariesRoutes: Routes = [
     {
@@ -10,7 +12,9 @@ const dictionariesRoutes: Routes = [
         component: DictionariesComponent,
         children: [
             { path: '', redirectTo: 'country-list', pathMatch: 'full' },
-            { path: 'country-list', component: CountryListComponent }
+            { path: 'country-list', component: CountryListComponent },
+            { path: 'county-list', component: CountyListComponent },
+            { path: 'city-list', component: CityListComponent }
         ]
     }
 ];

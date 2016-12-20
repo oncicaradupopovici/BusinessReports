@@ -11,15 +11,16 @@ using System.Threading.Tasks;
 
 namespace Avocado.Data.Repository
 {
-    public class Repository<TEntity> : IRepository<TEntity>
+    public class Repository<TEntity, TContext> : IRepository<TEntity>
         where TEntity : class, IEntity, IdAccessor, new()
+        where TContext : DbContext
     {
 
         protected readonly DbContext _c;
 
-        public Repository(DbContext c)
+        public Repository(IServiceProvider services)
         {
-            this._c = c;
+            this._c = services.GetService(typeof(TContext)) as DbContext;
         }
 
 

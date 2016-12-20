@@ -1,12 +1,7 @@
-﻿using BusinessReports.Data;
-using Microsoft.AspNetCore.Builder;
+﻿using BusinessReports.Data.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BusinessReports.Data
 {
@@ -28,8 +23,7 @@ namespace BusinessReports.Data
 
         public void ConfigureServices(IServiceCollection svc)
         {
-            svc.AddSingleton<IConfigurationRoot>(_config);
-
+            svc.AddSingleton(_config);
             svc.AddBusinessReportsDataAccess(_config);
         }
 

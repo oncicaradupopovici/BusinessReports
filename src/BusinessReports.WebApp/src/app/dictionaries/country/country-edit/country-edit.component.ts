@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, ElementRef, ViewChild }
 import {NgForm} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { BaseEditComponent } from '../../../avocado';
 import { Country } from '../country';
@@ -14,8 +15,12 @@ import { CountryService } from '../country.service';
 })
 export class CountryEditComponent extends BaseEditComponent<Country> {
 
-    constructor(activeModal: NgbActiveModal, crudService: CountryService) {
-        super(activeModal, crudService);
+    constructor(
+        activeModal: NgbActiveModal,
+        toastr: ToastsManager,
+        crudService: CountryService) {
+
+        super(activeModal, toastr, crudService);
     }
 
     protected createNewModel(): Country {

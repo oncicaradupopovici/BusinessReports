@@ -13,10 +13,15 @@ namespace Avocado.Entity
         public int Id { get; set; }
     }
 
-    public abstract class CodedEntityBase : EntityBase
+    public abstract class CodedEntityBase : EntityBase, IValidatableObject
     {
         [MaxLength(20)]
         [Required]
         public string Code { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            yield return ValidationResult.Success;
+        }
     }
 }

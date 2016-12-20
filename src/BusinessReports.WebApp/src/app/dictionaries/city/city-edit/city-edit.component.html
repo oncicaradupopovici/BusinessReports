@@ -1,0 +1,37 @@
+<div *ngIf="model">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{model && model.id?'Edit':'Add'}} city</h4>
+    </div>
+    <div class="modal-body">
+        <form #form="ngForm" novalidate>
+            <div class="form-group" [ngClass]="{'has-danger': name.invalid && name.touched}">
+                <label for="name" class="form-control-label">Name</label>
+                <input type="text" class="form-control" [ngClass]="{'form-control-danger': name.invalid && name.touched}" id="name" name="name" placeholder=""
+                       #name="ngModel" [(ngModel)]="model.name" required maxlength="100" />
+                <small class="form-control-feedback" *ngIf="name.invalid && name.errors.required && name.touched">The field is required</small>
+            </div>
+            <div class="form-group" [ngClass]="{'has-danger': code.invalid && code.touched}">
+                <label for="code" class="form-control-label">Code</label>
+                <input type="text" class="form-control" [ngClass]="{'form-control-danger': code.invalid && code.touched}" id="code" name="code" placeholder=""
+                       #code="ngModel" [(ngModel)]="model.code" required maxlength="20" />
+                <small class="form-control-feedback" *ngIf="code.invalid && code.errors.required && code.touched">The field is required</small>
+                <small class="form-text text-muted">Usually a two letter code.</small>
+            </div>
+            <div class="form-group" [ngClass]="{'has-danger': county.invalid && county.touched}">
+                <label for="county" class="form-control-label">County</label>
+                <select class="form-control" [ngClass]="{'form-control-danger': county.invalid && county.touched}" id="county" name="county" placeholder=""
+                       #county="ngModel" [(ngModel)]="model.countyId" required maxlength="20">
+                       <option [value]="county.id" *ngFor="let county of countyList">{{county.name}}</option>
+                </select>
+                <small class="form-control-feedback" *ngIf="county.invalid && county.errors.required && county.touched">The field is required</small>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()" [disabled]="form && !form.valid">Save changes</button>
+    </div>
+</div>

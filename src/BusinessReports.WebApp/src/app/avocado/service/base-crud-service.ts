@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
 import { environment } from '../../../environments/environment';
-import { IModel, PagedResult, PageInfo} from '../interfaces';
+import { IModel, PagedResult, PageInfo, ApiError, SelectListItem } from '../interfaces';
 
 
 export abstract class BaseCrudService<TModel extends IModel> {
@@ -22,6 +22,13 @@ export abstract class BaseCrudService<TModel extends IModel> {
 
     public getList(): Observable<TModel[]> {
         return this.http.get(this._apiUrl)
+            .share()
+            .map((res: Response) => res.json())
+            .catch(this.handleError); //...errors if any
+    }
+
+    public getSelectList(): Observable<SelectListItem[]> {
+        return this.http.get(`${this._apiUrl}/select`)
             .share()
             .map((res: Response) => res.json())
             .catch(this.handleError); //...errors if any
@@ -70,18 +77,31 @@ export abstract class BaseCrudService<TModel extends IModel> {
             .catch(this.handleError); //...errors if any
     }
 
+    //private handleError(error: Response | any) {
+    //    // In a real world app, we might use a remote logging infrastructure
+    //    let errMsg: string;
+    //    if (error instanceof Response) {
+    //        const body = error.json() || '';
+    //        const err = body.error || JSON.stringify(body);
+    //        errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    //    } else {
+    //        errMsg = error.message ? error.message : error.toString();
+    //    }
+    //    console.error(errMsg);
+    //    return Observable.throw(errMsg);
+    //}
+
     private handleError(error: Response | any) {
-        // In a real world app, we might use a remote logging infrastructure
-        let errMsg: string;
-        if (error instanceof Response) {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-        } else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return Observable.throw(errMsg);
+        let jsonResponse = error.json();
+        let apiError = new ApiError();
+        apiError.message = jsonResponse.message;
+        apiError.details = jsonResponse.details;
+        apiError.validations = jsonResponse.validations;
+        apiError.status = error.status;
+        apiError.statusText = error.statusText;
+
+        console.error(JSON.stringify(apiError));
+        return Observable.throw(apiError);
     }
 
     protected abstract getApiPath(): string; // => '/country'

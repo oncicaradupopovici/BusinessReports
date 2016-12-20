@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Serialization;
 using System.Reflection;
 using AutoMapper;
-using BusinessReports.Service;
-using BusinessReports.Data;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
-using Avocado.Web.ActionFilters;
 using Avocado.Web.Consts;
+using Avocado.Web.Extensions.DependencyInjection;
+using BusinessReports.Service.Extensions;
+using BusinessReports.Data.Extensions;
+using Newtonsoft.Json;
+using Avocado.Web.Models;
+using Newtonsoft.Json.Serialization;
+using BusinessReports.Entity.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using BusinessReports.Data;
 
 namespace BusinessReports.WebApi
 {
@@ -40,19 +41,15 @@ namespace BusinessReports.WebApi
         {
             services.AddSingleton(_configuration);
             services.AddCors();
-            services.AddMvc()
-                .AddJsonOptions(opts =>
-                {
-                    // Force Camel Case to JSON
-                    opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                })
-                .AddMvcOptions(options =>
-                {
-                    options.Filters.Add(new ValidateModelActionFilter());
-                });
+            services.AddMvc();          
             services.AddAutoMapper(Assembly.GetEntryAssembly());
+
+            services.AddAvocado();
             services.AddBusinessReportsDataAccess(_configuration);
             services.AddBusinessReportServices();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<BusinessReportsDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,12 +74,13 @@ namespace BusinessReports.WebApi
                     async context =>
                     {
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        //context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                        context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
 
                         var error = context.Features.Get<IExceptionHandlerFeature>();
                         if (error != null)
                         {
-                            await context.Response.WriteAsync(error.Error.ToString()).ConfigureAwait(false);
+                            await context.Response.WriteAsync(
+                                JsonConvert.SerializeObject( new ApiError { Message = error.Error.Message, Details = error.ToString() }, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver()} )).ConfigureAwait(false);
                         }
                     });
               });

@@ -1,8 +1,9 @@
 ﻿import { OnInit } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
-import { IModel } from '../interfaces';
+import { IModel, ApiError } from '../interfaces';
 import { ListDeleteConfirmationComponent } from './list-delete-confirmation/list-delete-confirmation.component';
 import { BaseEditComponent } from '../edit/base-edit-component'
 
@@ -14,7 +15,11 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
     public totalCount: number = 0;
     private searchTerm: string = ''; 
 
-    constructor(protected slimLoadingBarService: SlimLoadingBarService, protected modalService: NgbModal, protected crudService: any) {
+    constructor(
+        protected slimLoadingBarService: SlimLoadingBarService,
+        protected modalService: NgbModal,
+        protected toastr: ToastsManager,
+        protected crudService: any) {
     }
 
     public ngOnInit() {
@@ -34,7 +39,9 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
 
                 this.slimLoadingBarService.complete();
             },
-            err => console.log(err)
+            err => {
+                this.handleApiError(err);
+            }
         );
     }
 
@@ -43,10 +50,15 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
     }
 
     public delete(id: number) {
-        this.crudService.delete(id)
-            .subscribe(c => {
+        this.crudService.delete(id).subscribe(
+            c => {
+                this.toastr.success("Deleted successfully", "Success");
                 this.reloadCurrentPage();
-            });
+            },
+            err => {
+                this.handleApiError(err);
+            }
+        );
     }
 
     public performSearch(term: string) {
@@ -75,4 +87,9 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
     }
 
     protected abstract getEditComponentType(): any
+
+    private handleApiError(err: ApiError) {
+        this.slimLoadingBarService.reset();
+        this.toastr.error(err.getFriendlyMessage(), err.getFriendlyStatus(), { dismiss: 'click' });
+    }
 }

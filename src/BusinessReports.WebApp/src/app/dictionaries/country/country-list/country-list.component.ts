@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { BaseListComponent} from '../../../avocado';
 
@@ -15,8 +16,13 @@ import { CountryService } from '../country.service';
 })
 export class CountryListComponent extends BaseListComponent<Country> {
 
-    constructor(slimLoadingBarService: SlimLoadingBarService, modalService: NgbModal, crudService: CountryService) {
-        super(slimLoadingBarService, modalService, crudService)
+    constructor(
+        slimLoadingBarService: SlimLoadingBarService,
+        modalService: NgbModal,
+        toastr: ToastsManager,
+        crudService: CountryService) {
+
+        super(slimLoadingBarService, modalService, toastr, crudService);
     }
 
     protected getEditComponentType(): any {

@@ -16,6 +16,31 @@ namespace BusinessReports.Data.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("BusinessReports.Entity.Dictionary.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
+
+                    b.Property<int>("CountyId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.HasIndex("CountyId");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("BusinessReports.Entity.Dictionary.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -216,6 +241,14 @@ namespace BusinessReports.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserTokens");
+                });
+
+            modelBuilder.Entity("BusinessReports.Entity.Dictionary.City", b =>
+                {
+                    b.HasOne("BusinessReports.Entity.Dictionary.County", "County")
+                        .WithMany()
+                        .HasForeignKey("CountyId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BusinessReports.Entity.Dictionary.County", b =>

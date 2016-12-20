@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Avocado.Web.Extensions;
+using Avocado.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,13 @@ namespace Avocado.Web.ActionFilters
         {
             if (actionContext.ModelState.IsValid == false)
             {
-                actionContext.Result = new BadRequestObjectResult(actionContext.ModelState);
+                var apiError = new ApiError
+                {
+                    Message = "The request is invalid.",
+                    Validations = actionContext.ModelState.GetErrors()
+                };
+
+                actionContext.Result = new BadRequestObjectResult(apiError);
             }
         }
     }

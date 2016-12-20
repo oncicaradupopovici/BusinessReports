@@ -17,6 +17,7 @@ namespace BusinessReports.Data
     {
         public DbSet<Country> Countries { get; set; }
         public DbSet<County> Counties { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public BusinessReportsDbContext(DbContextOptions<BusinessReportsDbContext> options)
             : base(options)
