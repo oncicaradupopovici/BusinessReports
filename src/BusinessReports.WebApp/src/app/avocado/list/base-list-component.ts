@@ -5,7 +5,8 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { IModel, ApiError } from '../interfaces';
 import { ListDeleteConfirmationComponent } from './list-delete-confirmation/list-delete-confirmation.component';
-import { BaseEditComponent } from '../edit/base-edit-component'
+import { BaseEditComponent } from '../edit/base-edit-component';
+import { BaseCrudService } from '../service/base-crud-service';
 
 export abstract class BaseListComponent<TModel extends IModel> implements OnInit {
 
@@ -19,7 +20,7 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
         protected slimLoadingBarService: SlimLoadingBarService,
         protected modalService: NgbModal,
         protected toastr: ToastsManager,
-        protected crudService: any) {
+        protected crudService: BaseCrudService<TModel>) {
     }
 
     public ngOnInit() {

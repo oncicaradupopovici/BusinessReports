@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Country } from './country';
+import { Caen } from './caen';
 import { BaseCrudService } from '../../avocado';
 
 @Injectable()
-export class CountryService extends BaseCrudService<Country> {
+export class CaenService extends BaseCrudService<Caen> {
 
     constructor(http: Http) {
         super(http);
     }
 
     protected getApiPath(): string {
-        return '/country';
+        return '/caen';
     } 
 }

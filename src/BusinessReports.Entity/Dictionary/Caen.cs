@@ -8,15 +8,11 @@ using System.Threading.Tasks;
 
 namespace BusinessReports.Entity.Dictionary
 {
-    public class City : EntityBase
+    public class Caen : CodedEntityBase
     {
         [MaxLength(100)]
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public int CountyId { get; set; }
-
-        public virtual County County { get; set; }
     }
 }

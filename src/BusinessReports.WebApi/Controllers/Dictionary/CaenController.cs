@@ -9,15 +9,15 @@ using System.Linq.Expressions;
 
 namespace BusinessReports.WebApi.Controllers.Api.Dictionary
 {
-    [Route("api/[controller]", Name = "Countries")]
-    public class CountryController : CrudController<Entity.Dictionary.Country, Models.Dictionary.Country>
+    [Route("api/[controller]", Name = "Caens")]
+    public class CaenController : CrudController<Entity.Dictionary.Caen, Models.Dictionary.Caen>
     {
-        public CountryController(ICrudService<Entity.Dictionary.Country> crudSvc, IMapper mapper) 
+        public CaenController(ICrudService<Entity.Dictionary.Caen> crudSvc, IMapper mapper) 
             : base(crudSvc, mapper)
         {
         }
 
-        protected override Expression<Func<Entity.Dictionary.Country, bool>> GetSearchPredicate(string search)
+        protected override Expression<Func<Entity.Dictionary.Caen, bool>> GetSearchPredicate(string search)
         {
             return c => c.Name.Contains(search) || c.Code.Contains(search);
         }

@@ -5,6 +5,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { IModel, ApiError } from '../interfaces';
+import { BaseCrudService } from '../service/base-crud-service';
 
 export abstract class BaseEditComponent<TModel extends IModel> implements OnInit {
 
@@ -16,7 +17,7 @@ export abstract class BaseEditComponent<TModel extends IModel> implements OnInit
     constructor(
         private activeModal: NgbActiveModal,
         protected toastr: ToastsManager,
-        private crudService: any
+        private crudService: BaseCrudService<TModel>
     ) {
     }
 

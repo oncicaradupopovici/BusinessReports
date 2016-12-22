@@ -27,10 +27,6 @@ export class CityEditComponent extends BaseEditComponent<City> {
     super(activeModal, toastr, crudService);
   }
 
-  protected createNewModel(): City {
-    return new City();
-  }
-
   public ngOnInit() {
     this.countyService.getSelectList().subscribe(
       list => {
@@ -40,5 +36,11 @@ export class CityEditComponent extends BaseEditComponent<City> {
         this.handleApiError(err);
       });
   }
+
+  protected createNewModel(): City {
+    return new City();
+  }
+
+  
 
 }

@@ -1,7 +1,7 @@
-export class Country {
+export class Caen {
     public id: number;
     public code: string;
-    public name?: string;
+    public name: string;
 
     constructor(
     ) {

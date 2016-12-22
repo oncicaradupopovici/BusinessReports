@@ -5,27 +5,27 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { BaseListComponent} from '../../../avocado';
 
-import { CountryEditComponent } from '../country-edit/country-edit.component';
-import { Country } from '../country';
-import { CountryService } from '../country.service';
+import { CaenEditComponent } from '../caen-edit/caen-edit.component';
+import { Caen } from '../caen';
+import { CaenService } from '../caen.service';
 
 @Component({
-  selector: 'country-list',
-  templateUrl: './country-list.component.html',
-  styleUrls: ['./country-list.component.css']
+  selector: 'caen-list',
+  templateUrl: './caen-list.component.html',
+  styleUrls: ['./caen-list.component.css']
 })
-export class CountryListComponent extends BaseListComponent<Country> {
+export class CaenListComponent extends BaseListComponent<Caen> {
 
     constructor(
         slimLoadingBarService: SlimLoadingBarService,
         modalService: NgbModal,
         toastr: ToastsManager,
-        crudService: CountryService) {
+        crudService: CaenService) {
 
         super(slimLoadingBarService, modalService, toastr, crudService);
     }
 
     protected getEditComponentType(): any {
-        return CountryEditComponent;
+        return CaenEditComponent;
     }
 }

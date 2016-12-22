@@ -39,16 +39,16 @@ namespace BusinessReports.Data
 
 
             //Seed country
-            if (_ctx.Countries.FirstOrDefault(c=> c.Code == "RO") == null)
-            {
-                var c = new Country
-                {
-                    Code = "RO",
-                    Name = "Romania"
-                };
-                _ctx.Countries.Add(c);
-                await _ctx.SaveChangesAsync();
-            }
+            //if (_ctx.Countries.FirstOrDefault(c=> c.Code == "RO") == null)
+            //{
+            //    var c = new Country
+            //    {
+            //        Code = "RO",
+            //        Name = "Romania"
+            //    };
+            //    _ctx.Countries.Add(c);
+            //    await _ctx.SaveChangesAsync();
+            //}
         }
     }
 }

@@ -10,7 +10,7 @@ export abstract class BaseCrudService<TModel extends IModel> {
 
     private _apiUrl: string = environment.apiUrl + this.getApiPath();
 
-    constructor(private http: Http) {
+    constructor(protected http: Http) {
     }
 
     public get(id: number): Observable<TModel> {
@@ -28,7 +28,7 @@ export abstract class BaseCrudService<TModel extends IModel> {
     }
 
     public getSelectList(): Observable<SelectListItem[]> {
-        return this.http.get(`${this._apiUrl}/select`)
+        return this.http.get(`${this._apiUrl}/select-list`)
             .share()
             .map((res: Response) => res.json())
             .catch(this.handleError); //...errors if any
@@ -91,7 +91,7 @@ export abstract class BaseCrudService<TModel extends IModel> {
     //    return Observable.throw(errMsg);
     //}
 
-    private handleError(error: Response | any) {
+    protected handleError(error: Response | any) {
         let jsonResponse = error.json();
         let apiError = new ApiError();
         apiError.message = jsonResponse.message;

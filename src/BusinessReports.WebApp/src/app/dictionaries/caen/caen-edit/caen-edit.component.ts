@@ -5,26 +5,26 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { BaseEditComponent, SelectListItem } from '../../../avocado';
-import { County } from '../county';
-import { CountyService } from '../county.service';
+import { Caen } from '../caen';
+import { CaenService } from '../caen.service';
 
 
 @Component({
-  selector: 'county-edit',
-  templateUrl: 'county-edit.component.html'
+  selector: 'caen-edit',
+  templateUrl: 'caen-edit.component.html'
 })
-export class CountyEditComponent extends BaseEditComponent<County> {
+export class CaenEditComponent extends BaseEditComponent<Caen> {
 
   constructor(
     activeModal: NgbActiveModal,
     toastr: ToastsManager,
-    crudService: CountyService) {
+    crudService: CaenService) {
 
     super(activeModal, toastr, crudService);
   }
 
-  protected createNewModel(): County {
-    return new County();
+  protected createNewModel(): Caen {
+    return new Caen();
   }
 
 }

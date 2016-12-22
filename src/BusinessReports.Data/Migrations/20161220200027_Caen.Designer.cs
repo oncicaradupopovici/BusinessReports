@@ -8,9 +8,10 @@ using BusinessReports.Data;
 namespace BusinessReports.Data.Migrations
 {
     [DbContext(typeof(BusinessReportsDbContext))]
-    partial class BusinessReportsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161220200027_Caen")]
+    partial class Caen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -42,6 +43,10 @@ namespace BusinessReports.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
+
                     b.Property<int>("CountyId");
 
                     b.Property<string>("Name")
@@ -50,12 +55,33 @@ namespace BusinessReports.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountyId");
-
-                    b.HasIndex("Name", "CountyId")
+                    b.HasIndex("Code")
                         .IsUnique();
 
+                    b.HasIndex("CountyId");
+
                     b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("BusinessReports.Entity.Dictionary.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 20);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 100);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("BusinessReports.Entity.Dictionary.County", b =>
@@ -67,6 +93,8 @@ namespace BusinessReports.Data.Migrations
                         .IsRequired()
                         .HasAnnotation("MaxLength", 20);
 
+                    b.Property<int>("CountryId");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasAnnotation("MaxLength", 100);
@@ -75,34 +103,10 @@ namespace BusinessReports.Data.Migrations
 
                     b.HasIndex("Code")
                         .IsUnique();
+
+                    b.HasIndex("CountryId");
 
                     b.ToTable("Counties");
-                });
-
-            modelBuilder.Entity("BusinessReports.Entity.Dictionary.Indicator", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Arguments")
-                        .HasAnnotation("MaxLength", 1000);
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasAnnotation("MaxLength", 20);
-
-                    b.Property<int>("IndicatorType");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasAnnotation("MaxLength", 100);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Code")
-                        .IsUnique();
-
-                    b.ToTable("Indicators");
                 });
 
             modelBuilder.Entity("BusinessReports.Entity.Identity.User", b =>
@@ -266,6 +270,14 @@ namespace BusinessReports.Data.Migrations
                     b.HasOne("BusinessReports.Entity.Dictionary.County", "County")
                         .WithMany()
                         .HasForeignKey("CountyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BusinessReports.Entity.Dictionary.County", b =>
+                {
+                    b.HasOne("BusinessReports.Entity.Dictionary.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

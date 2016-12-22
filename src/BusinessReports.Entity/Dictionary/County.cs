@@ -13,10 +13,5 @@ namespace BusinessReports.Entity.Dictionary
         [MaxLength(100)]
         [Required]
         public string Name { get; set; }
-
-        [Required]
-        public int CountryId { get; set; }
-
-        public virtual Country Country { get; set; }
     }
 }

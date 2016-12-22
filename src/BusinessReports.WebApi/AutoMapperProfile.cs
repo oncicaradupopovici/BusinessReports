@@ -10,10 +10,6 @@ namespace BusinessReports.WebApi.AutoMapperProfile
     {
         public AutoMapperProfile()
         {
-            CreateMap<Entity.Dictionary.Country, Models.Dictionary.Country>()
-                .ReverseMap();
-            CreateMap<Entity.Dictionary.Country, Avocado.Web.Models.SelectListItem>();
-
             CreateMap<Entity.Dictionary.County, Models.Dictionary.County>()
                 .ReverseMap();
             CreateMap<Entity.Dictionary.County, Avocado.Web.Models.SelectListItem>();
@@ -21,6 +17,14 @@ namespace BusinessReports.WebApi.AutoMapperProfile
             CreateMap<Entity.Dictionary.City, Models.Dictionary.City>()
                 .ReverseMap();
             CreateMap<Entity.Dictionary.City, Avocado.Web.Models.SelectListItem>();
+
+            CreateMap<Entity.Dictionary.Caen, Models.Dictionary.Caen>()
+                .ReverseMap();
+            CreateMap<Entity.Dictionary.Caen, Avocado.Web.Models.SelectListItem>();
+
+            CreateMap<Entity.Dictionary.Indicator, Models.Dictionary.Indicator>()
+                .ReverseMap();
+            CreateMap<Entity.Dictionary.Indicator, Avocado.Web.Models.SelectListItem>();
         }
     }
 }

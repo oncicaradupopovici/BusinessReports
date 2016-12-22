@@ -8,9 +8,10 @@ using BusinessReports.Data;
 namespace BusinessReports.Data.Migrations
 {
     [DbContext(typeof(BusinessReportsDbContext))]
-    partial class BusinessReportsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161221122609_Indicator")]
+    partial class Indicator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

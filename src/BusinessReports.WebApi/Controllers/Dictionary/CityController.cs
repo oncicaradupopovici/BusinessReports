@@ -19,7 +19,7 @@ namespace BusinessReports.WebApi.Controllers.Api.Dictionary
 
         protected override Expression<Func<Entity.Dictionary.City, bool>> GetSearchPredicate(string search)
         {
-            return c => c.Name == search || c.Code == search;
+            return c => c.Name == search;
         }
     }
 }

@@ -15,9 +15,10 @@ namespace BusinessReports.Data
 {
     public class BusinessReportsDbContext : IdentityDbContext<User>
     {
-        public DbSet<Country> Countries { get; set; }
         public DbSet<County> Counties { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Caen> Caens { get; set; }
+        public DbSet<Indicator> Indicators { get; set; }
 
         public BusinessReportsDbContext(DbContextOptions<BusinessReportsDbContext> options)
             : base(options)
@@ -39,22 +40,13 @@ namespace BusinessReports.Data
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
             builder.Entity<IdentityRole>().ToTable("Roles");
 
-            //builder.Entity<CodedEntityBase>()
-            //    .HasIndex(e => e.Code)
-            //    .IsUnique();
-
-            //var entitiesAss = typeof(Country).GetTypeInfo().Assembly;
-            //foreach(var type in entitiesAss.GetTypes().Where(t=> typeof(CodedEntityBase).IsAssignableFrom(t) && !t.GetTypeInfo().IsAbstract))
-            //{
-            //    builder.Entity(type).HasIndex("Code").IsUnique();
-            //}
 
             foreach (var entity in builder.Model.GetEntityTypes().Where(e=> typeof(CodedEntityBase).IsAssignableFrom(e.ClrType)))
             {
-                //entity.AddIndex(entity.FindProperty("Code")).IsUnique = true;
                 builder.Entity(entity.Name).HasIndex("Code").IsUnique();
-                //builder.Entity(entity.ClrType).HasIndex("Code").IsUnique();
             }
+
+            builder.Entity<City>().HasIndex(c => new { c.Name, c.CountyId }).IsUnique();
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
