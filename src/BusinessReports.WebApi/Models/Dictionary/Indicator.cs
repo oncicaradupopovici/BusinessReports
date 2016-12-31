@@ -1,5 +1,5 @@
 ﻿using Avocado.Core;
-using Avocado.Web.Models;
+using Avocado.WebApi.Models;
 using BusinessReports.Entity.Dictionary;
 using System;
 using System.Collections.Generic;
@@ -23,14 +23,6 @@ namespace BusinessReports.WebApi.Models.Dictionary
 
         [Required]
         public IndicatorType IndicatorType { get; set; }
-
-        public string IndicatorTypeName
-        {
-            get
-            {
-                return IndicatorType.ToString();
-            }
-        }
 
         [MaxLength(1000)]
         public string Arguments { get; set; }

@@ -8,12 +8,12 @@ using System.Reflection;
 using AutoMapper;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
-using Avocado.Web.Consts;
-using Avocado.Web.Extensions.DependencyInjection;
+using Avocado.WebApi.Consts;
+using Avocado.WebApi.Extensions.DependencyInjection;
 using BusinessReports.Service.Extensions;
 using BusinessReports.Data.Extensions;
 using Newtonsoft.Json;
-using Avocado.Web.Models;
+using Avocado.WebApi.Models;
 using Newtonsoft.Json.Serialization;
 using BusinessReports.Entity.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -87,13 +87,15 @@ namespace BusinessReports.WebApi
 
             app.UseMvc();
 
-            app.UseBusinessReportsDataAccess();
+            //app.UseBusinessReportsDataAccess();
 
             //using (var scope = scopeFactory.CreateScope())
             //{
             //    var initializer = scope.ServiceProvider.GetService<BusinessReportsInitializer>();
             //    initializer.SeedAsync().Wait();
             //}
+
+
         }
     }
 }

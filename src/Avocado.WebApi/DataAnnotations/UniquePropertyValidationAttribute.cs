@@ -7,7 +7,7 @@
 //using System.Linq;
 //using System.Threading.Tasks;
 
-//namespace Avocado.Web.DataAnnotations
+//namespace Avocado.WebApi.DataAnnotations
 //{
 //    public class UniquePropertyValidationAttribute: ValidationAttribute
 //    {

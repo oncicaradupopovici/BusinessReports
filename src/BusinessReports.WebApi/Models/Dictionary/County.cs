@@ -1,5 +1,5 @@
 ﻿using Avocado.Core;
-using Avocado.Web.Models;
+using Avocado.WebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

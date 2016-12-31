@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Avocado.Web.Controllers;
+using Avocado.WebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

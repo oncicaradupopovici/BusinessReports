@@ -28,7 +28,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Avocado.Entity", "src\Avoca
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Avocado.Data", "src\Avocado.Data\Avocado.Data.xproj", "{3A94A69D-B26F-4280-B85C-B6D88F1D10AB}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Avocado.Web", "src\Avocado.Web\Avocado.Web.xproj", "{60160FC8-3E8B-4653-87DF-C02BBF2EA450}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Avocado.WebApi", "src\Avocado.WebApi\Avocado.WebApi.xproj", "{60160FC8-3E8B-4653-87DF-C02BBF2EA450}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Avocado.Service", "src\Avocado.Service\Avocado.Service.xproj", "{946EF5E5-7336-456D-92D9-8C88F29A91EA}"
 EndProject

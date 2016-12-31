@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Avocado.Web.Models
+namespace Avocado.WebApi.Models
 {
     public class SelectListItem
     {

@@ -1,4 +1,4 @@
-﻿using Avocado.Web.Models;
+﻿using Avocado.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Avocado.Web.ActionFilters
+namespace Avocado.WebApi.ActionFilters
 {
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {

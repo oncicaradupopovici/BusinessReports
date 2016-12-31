@@ -3,8 +3,8 @@ using AutoMapper.QueryableExtensions;
 using Avocado.Core;
 using Avocado.Entity;
 using Avocado.Service.Contracts;
-using Avocado.Web.Consts;
-using Avocado.Web.Models;
+using Avocado.WebApi.Consts;
+using Avocado.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +14,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Avocado.Web.Controllers
+namespace Avocado.WebApi.Controllers
 {
     //[Route("api/[controller]", Name = "Countries")]
     public abstract class CrudController<TEntity, TModel> : Controller
@@ -86,7 +87,6 @@ namespace Avocado.Web.Controllers
             {
                 return NotFound();
             }
-
             var model = _mapper.Map<TEntity, TModel>(entity);
             return new ObjectResult(model);
         }

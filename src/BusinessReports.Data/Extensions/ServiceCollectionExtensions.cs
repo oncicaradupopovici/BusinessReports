@@ -22,7 +22,7 @@ namespace BusinessReports.Data.Extensions
         {
             services.AddEntityFrameworkSqlServer().AddDbContext<BusinessReportsDbContext>((serviceProvider, options) =>
                 options
-                    .UseSqlServer(config.GetConnectionString("DefaultConnection"))
+                    .UseSqlServer(config.GetConnectionString("DefaultConnection"), b=> b.MigrationsAssembly("BusinessReports.Data"))
                     .UseInternalServiceProvider(serviceProvider));
 
            //services.AddTransient<BusinessReportsInitializer>();
@@ -31,16 +31,16 @@ namespace BusinessReports.Data.Extensions
             return services;
         }
 
-        public static IApplicationBuilder UseBusinessReportsDataAccess(this IApplicationBuilder app)
-        {
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                //serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().Database.EnsureCreated();
-                serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().Database.Migrate();
-                //serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().EnsureSeedData();
-            }
+        //public static IApplicationBuilder UseBusinessReportsDataAccess(this IApplicationBuilder app)
+        //{
+        //    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        //    {
+        //        //serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().Database.EnsureCreated();
+        //        serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().Database.Migrate();
+        //        //serviceScope.ServiceProvider.GetService<BusinessReportsDbContext>().EnsureSeedData();
+        //    }
 
-            return app;
-        }
+        //    return app;
+        //}
     }
 }

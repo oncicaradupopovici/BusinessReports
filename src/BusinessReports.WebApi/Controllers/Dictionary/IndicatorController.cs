@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Avocado.Web.Controllers;
+using Avocado.WebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avocado.Service.Contracts;
 using System.Linq.Expressions;
-using Avocado.Web.Models;
+using Avocado.WebApi.Models;
 using BusinessReports.Entity.Dictionary;
 
 namespace BusinessReports.WebApi.Controllers.Api.Dictionary
