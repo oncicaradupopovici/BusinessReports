@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using Avocado.Entity;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Avocado.Data.Extensions
 {

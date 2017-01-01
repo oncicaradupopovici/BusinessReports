@@ -6,12 +6,12 @@
     "BusinessReports.Core": "1.0.0-*",
     "BusinessReports.Data": "1.0.0-*",
     "BusinessReports.Entity": "1.0.0-*",
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.1"
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [ "portable-net451+win8" ]
+    "netstandard1.6": {
+      "imports": "dnxcore50"
     }
   }
 }
