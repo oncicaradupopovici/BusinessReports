@@ -22,7 +22,7 @@ namespace BusinessReports.Data.Extensions
         {
             services.AddEntityFrameworkSqlServer().AddDbContext<BusinessReportsDbContext>((serviceProvider, options) =>
                 options
-                    .UseSqlServer(config.GetConnectionString("DefaultConnection"), b=> b.MigrationsAssembly("BusinessReports.Data"))
+                    .UseSqlServer(config.GetConnectionString("DefaultConnection"), b=> b.MigrationsAssembly("BusinessReports.WebApi"))
                     .UseInternalServiceProvider(serviceProvider));
 
            //services.AddTransient<BusinessReportsInitializer>();
