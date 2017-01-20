@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace BusinessReports.WebApi.Controllers.Api.Dictionary
 {
-    [Route("api/[controller]", Name = "Indicators")]
+    [Route("api/indicators", Name = "Indicators")]
     public class IndicatorController : CrudController<Domain.Dictionary.Indicator, Models.Dictionary.Indicator>
     {
         public IndicatorController(IRepository<Domain.Dictionary.Indicator> crudSvc, IMapper mapper) 

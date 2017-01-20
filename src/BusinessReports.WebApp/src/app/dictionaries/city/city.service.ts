@@ -10,7 +10,7 @@ export class CityService extends BaseCrudService<City> {
         super(http);
     }
 
-    protected getApiPath(): string {
-        return '/city';
+    protected get ressourceRelativePath(): string {
+        return '/cities';
     } 
 }

@@ -8,27 +8,31 @@ import { IModel, PagedResult, PageInfo, ApiError, SelectListItem } from '../inte
 
 export abstract class BaseCrudService<TModel extends IModel> {
 
-    private _apiUrl: string = environment.apiUrl + this.getApiPath();
+    
+    protected abstract get ressourceRelativePath(): string ;
+    private get ressourceAbsoluteUrl(): string {
+        return environment.apiBaseUrl + this.ressourceRelativePath;
+    }
 
     constructor(protected http: Http) {
     }
 
     public get(id: number): Observable<TModel> {
-        return this.http.get(`${this._apiUrl}/${id}`) // ...using get request
+        return this.http.get(`${this.ressourceAbsoluteUrl}/${id}`) // ...using get request
             .share()
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     }
 
     public getList(): Observable<TModel[]> {
-        return this.http.get(this._apiUrl)
+        return this.http.get(this.ressourceAbsoluteUrl)
             .share()
             .map((res: Response) => res.json())
             .catch(this.handleError); //...errors if any
     }
 
     public getSelectList(): Observable<SelectListItem[]> {
-        return this.http.get(`${this._apiUrl}/select-list`)
+        return this.http.get(`${this.ressourceAbsoluteUrl}/select-list`)
             .share()
             .map((res: Response) => res.json())
             .catch(this.handleError); //...errors if any
@@ -37,7 +41,7 @@ export abstract class BaseCrudService<TModel extends IModel> {
     public getPage(search: string, page: number, pageSize: number): Observable<PagedResult<TModel>> {
         //let headers = new Headers({ 'Access-Control-Allow-Headers': 'x-pagination' });
         //let options = new RequestOptions({ headers: headers });
-        return this.http.get(`${this._apiUrl}?search=${search}&page=${page}&pageSize=${pageSize}`/*, options*/)
+        return this.http.get(`${this.ressourceAbsoluteUrl}?search=${search}&page=${page}&pageSize=${pageSize}`/*, options*/)
             .share()
             .map((res: Response) => {
                 var data = <TModel[]>(res.json());
@@ -53,7 +57,7 @@ export abstract class BaseCrudService<TModel extends IModel> {
         let options = new RequestOptions({ headers: headers });
         let bodyString = JSON.stringify(document); // Stringify payload
 
-        return this.http.post(this._apiUrl, bodyString, options)
+        return this.http.post(this.ressourceAbsoluteUrl, bodyString, options)
             .share()
             .catch(this.handleError); //...errors if any
 
@@ -64,14 +68,14 @@ export abstract class BaseCrudService<TModel extends IModel> {
         let options = new RequestOptions({ headers: headers });
         let bodyString = JSON.stringify(document); // Stringify payload
 
-        return this.http.put(`${this._apiUrl}/${document.id}`, bodyString, options)
+        return this.http.put(`${this.ressourceAbsoluteUrl}/${document.id}`, bodyString, options)
             //.map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .share()
             .catch(this.handleError); //...errors if any
     }
 
     public delete(id: number): Observable<any> {
-        return this.http.delete(`${this._apiUrl}/${id}`) // ...using put request
+        return this.http.delete(`${this.ressourceAbsoluteUrl}/${id}`) // ...using put request
             //.map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .share()
             .catch(this.handleError); //...errors if any
@@ -103,6 +107,5 @@ export abstract class BaseCrudService<TModel extends IModel> {
         console.error(JSON.stringify(apiError));
         return Observable.throw(apiError);
     }
-
-    protected abstract getApiPath(): string; // => '/country'
+    
 }

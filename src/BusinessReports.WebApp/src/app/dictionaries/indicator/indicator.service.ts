@@ -14,14 +14,16 @@ export class IndicatorService extends BaseCrudService<Indicator> {
         super(http);
     }
 
-    public getSelectList(): Observable<SelectListItem[]> {
-        return this.http.get(`${environment.apiUrl}/indicatortype/select-list`)
+    protected get ressourceRelativePath(): string {
+        return '/indicators';
+    }
+
+    public getIndicatorTypeSelectList(): Observable<SelectListItem[]> {
+        return this.http.get(`${environment.apiBaseUrl}/indicatortypes/select-list`)
             .share()
             .map((res: Response) => res.json())
             .catch(this.handleError); //...errors if any
     }
 
-    protected getApiPath(): string {
-        return '/indicator';
-    } 
+     
 }

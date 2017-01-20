@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/county",
+      "launchUrl": "api/counties",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
     "BusinessReports.WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000/api/county",
+      "launchUrl": "http://localhost:5000/api/counties",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

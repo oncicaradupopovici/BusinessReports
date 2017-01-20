@@ -10,7 +10,7 @@ using BusinessReports.Domain.Dictionary;
 
 namespace BusinessReports.WebApi.Controllers.Api.Dictionary
 {
-    [Route("api/[controller]", Name = "IndicatorTypes")]
+    [Route("api/indicatortypes", Name = "IndicatorTypes")]
     public class IndicatorTypeController : Controller
     {
         [HttpGet("select-list")]

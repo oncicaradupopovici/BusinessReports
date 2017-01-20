@@ -35,7 +35,7 @@ export class IndicatorEditComponent extends BaseEditComponent<Indicator> {
   }
 
   public ngOnInit() {
-    this.indicatorService.getSelectList().subscribe(
+    this.indicatorService.getIndicatorTypeSelectList().subscribe(
       list => {
         this.indicatorTypeList = list;
       },

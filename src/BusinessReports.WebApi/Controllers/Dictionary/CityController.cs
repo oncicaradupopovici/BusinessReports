@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace BusinessReports.WebApi.Controllers.Api.Dictionary
 {
-    [Route("api/[controller]", Name = "Cities")]
+    [Route("api/cities", Name = "Cities")]
     public class CityController : CrudController<Domain.Dictionary.City, Models.Dictionary.City>
     {
         public CityController(IRepository<Domain.Dictionary.City> crudSvc, IMapper mapper) 

@@ -19,7 +19,6 @@ using System.Threading.Tasks;
 
 namespace Avocado.WebApi.Controllers
 {
-    //[Route("api/[controller]", Name = "Countries")]
     public abstract class CrudController<TEntity, TModel> : Controller
         where TEntity : class, IEntity, IdAccessor, new()
         where TModel: IModel, IdAccessor, new()

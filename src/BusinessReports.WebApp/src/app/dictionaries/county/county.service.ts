@@ -10,7 +10,7 @@ export class CountyService extends BaseCrudService<County> {
         super(http);
     }
 
-    protected getApiPath(): string {
-        return '/county';
+    protected get ressourceRelativePath(): string {
+        return '/counties';
     } 
 }

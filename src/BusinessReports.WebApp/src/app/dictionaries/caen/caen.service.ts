@@ -10,7 +10,7 @@ export class CaenService extends BaseCrudService<Caen> {
         super(http);
     }
 
-    protected getApiPath(): string {
-        return '/caen';
+    protected get ressourceRelativePath(): string {
+        return '/caens';
     } 
 }
