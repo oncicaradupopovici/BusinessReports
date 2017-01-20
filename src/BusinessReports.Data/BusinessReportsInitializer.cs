@@ -1,5 +1,5 @@
-﻿using BusinessReports.Entity.Dictionary;
-using BusinessReports.Entity.Identity;
+﻿using BusinessReports.Domain.Dictionary;
+using BusinessReports.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

@@ -3,12 +3,9 @@
 
   "dependencies": {
     "NETStandard.Library": "1.6.1",
-    "Microsoft.Extensions.Configuration": "1.1.0",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
+    "Avocado.Domain": "1.0.0-*",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
-    "Avocado.Data": "1.0.0-*",
-    "BusinessReports.Domain": "1.0.0-*",
-    "BusinessReports.Data.Contracts": "1.0.0-*"
+    "System.ComponentModel.Annotations": "4.3.0"
   },
 
   "frameworks": {
@@ -17,5 +14,3 @@
     }
   }
 }
-    
-  

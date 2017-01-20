@@ -6,11 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using BusinessReports.Entity.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using Avocado.Data.Contracts;
-using BusinessReports.Entity.Dictionary;
 using Avocado.Data.Extensions;
 using System.Reflection;
 
@@ -27,7 +22,7 @@ namespace BusinessReports.Data.Extensions
 
            //services.AddTransient<BusinessReportsInitializer>();
 
-            services.AddAvocadoRepositoriesFor(Assembly.Load(new AssemblyName("BusinessReports.Entity")), typeof(BusinessReportsDbContext));
+            services.AddAvocadoRepositoriesFor(Assembly.Load(new AssemblyName("BusinessReports.Domain")), typeof(BusinessReportsDbContext));
             return services;
         }
 

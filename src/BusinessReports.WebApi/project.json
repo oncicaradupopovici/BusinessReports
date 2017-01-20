@@ -17,11 +17,9 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final",
     "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.1.2",
-    "BusinessReports.Core": "1.0.0-*",
+    "Avocado.WebApi": "1.0.0-*",
     "BusinessReports.Data": "1.0.0-*",
-    "BusinessReports.Entity": "1.0.0-*",
-    "BusinessReports.Service": "1.0.0-*",
-    "Avocado.WebApi": "1.0.0-*"
+    "BusinessReports.Domain": "1.0.0-*"
   },
 
   "tools": {

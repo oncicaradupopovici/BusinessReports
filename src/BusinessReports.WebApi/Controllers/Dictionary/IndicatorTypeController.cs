@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Avocado.Service.Contracts;
 using System.Linq.Expressions;
 using Avocado.WebApi.Models;
-using BusinessReports.Entity.Dictionary;
+using BusinessReports.Domain.Dictionary;
 
 namespace BusinessReports.WebApi.Controllers.Api.Dictionary
 {

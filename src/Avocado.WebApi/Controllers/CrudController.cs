@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Avocado.Core;
-using Avocado.Entity;
-using Avocado.Service.Contracts;
+using Avocado.Data.Contracts;
+using Avocado.Domain;
 using Avocado.WebApi.Consts;
 using Avocado.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,23 +21,23 @@ namespace Avocado.WebApi.Controllers
 {
     //[Route("api/[controller]", Name = "Countries")]
     public abstract class CrudController<TEntity, TModel> : Controller
-        where TEntity : IEntity, IdAccessor, new()
+        where TEntity : class, IEntity, IdAccessor, new()
         where TModel: IModel, IdAccessor, new()
 
     {
-        private ICrudService<TEntity> _crudSvc;
+        private IRepository<TEntity> _repository;
         private IMapper _mapper;
 
-        public CrudController(ICrudService<TEntity> crudSvc, IMapper mapper)
+        public CrudController(IRepository<TEntity> repository, IMapper mapper)
         {
-            this._crudSvc = crudSvc;
+            this._repository = repository;
             this._mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IEnumerable<TModel>> GetAllAsync(string search, int? page, int pageSize = 20)
         {
-            var query = this._crudSvc.GetAll();
+            var query = this._repository.GetAll();
             if (!string.IsNullOrWhiteSpace(search))
                 query = query.Where(GetSearchPredicate(search));
 
@@ -73,7 +73,7 @@ namespace Avocado.WebApi.Controllers
         [HttpGet("select-list")]
         public async Task<IEnumerable<SelectListItem>> GetSelectList()
         {
-            var query = this._crudSvc.GetAll().ProjectTo<SelectListItem>();
+            var query = this._repository.GetAll().ProjectTo<SelectListItem>();
             var data = await query.ToListAsync();
             return data;
         }
@@ -82,7 +82,7 @@ namespace Avocado.WebApi.Controllers
         [HttpGet("{id}"/*, Name = "GetItem"*/)]
         public async Task<IActionResult> GetSingleAsync(int id)
         {
-            var entity = await _crudSvc.GetSingleAsync(id);
+            var entity = await _repository.GetSingleAsync(id);
             if (entity == null)
             {
                 return NotFound();
@@ -100,8 +100,8 @@ namespace Avocado.WebApi.Controllers
             }
 
             var entity = _mapper.Map<TModel, TEntity>(model);
-            this._crudSvc.Create(entity);
-            await this._crudSvc.SaveAsync();
+            this._repository.Insert(entity);
+            await this._repository.SaveAsync();
 
             var result = _mapper.Map<TEntity, TModel>(entity);
             //return CreatedAtRoute("GetItem", new { id = entity.Id }, result);
@@ -117,8 +117,11 @@ namespace Avocado.WebApi.Controllers
             }
 
             var entityList = _mapper.Map<IEnumerable<TModel>, IEnumerable<TEntity>>(modelList);
-            _crudSvc.Import(entityList);
-            await _crudSvc.SaveAsync();
+            var newEntities = entityList.Where(e => e.Id == 0).ToList();
+            var existentEntities = entityList.Where(e => e.Id != 0).ToList();
+            _repository.InsertRange(newEntities);
+            _repository.UpdateRange(existentEntities);
+            await _repository.SaveAsync();
 
             return Ok();
         }
@@ -131,14 +134,14 @@ namespace Avocado.WebApi.Controllers
                 return BadRequest("Missing model");
             }
 
-            var entity = await _crudSvc.GetSingleAsync(model.Id);
+            var entity = await _repository.GetSingleAsync(model.Id);
             if (entity == null)
             {
                 return NotFound();
             }
 
             _mapper.Map(model, entity);
-            await this._crudSvc.SaveAsync();
+            await this._repository.SaveAsync();
 
             return NoContent();
         }
@@ -147,14 +150,14 @@ namespace Avocado.WebApi.Controllers
         //[HttpDelete]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var entity = await _crudSvc.GetSingleAsync(id);
+            var entity = await _repository.GetSingleAsync(id);
             if (entity == null)
             {
                 return NotFound();
             }
 
-            this._crudSvc.Delete(id);
-            await this._crudSvc.SaveAsync();
+            this._repository.Delete(id);
+            await this._repository.SaveAsync();
 
             return NoContent();
         }

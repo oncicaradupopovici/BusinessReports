@@ -10,12 +10,11 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Avocado.WebApi.Consts;
 using Avocado.WebApi.Extensions.DependencyInjection;
-using BusinessReports.Service.Extensions;
 using BusinessReports.Data.Extensions;
 using Newtonsoft.Json;
 using Avocado.WebApi.Models;
 using Newtonsoft.Json.Serialization;
-using BusinessReports.Entity.Identity;
+using BusinessReports.Domain.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using BusinessReports.Data;
 
@@ -46,7 +45,6 @@ namespace BusinessReports.WebApi
 
             services.AddAvocado();
             services.AddBusinessReportsDataAccess(_configuration);
-            services.AddBusinessReportServices();
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<BusinessReportsDbContext>()
                 .AddDefaultTokenProviders();

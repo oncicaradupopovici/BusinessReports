@@ -17,7 +17,7 @@ namespace BusinessReports.WebApi.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BusinessReports.Entity.Dictionary.Caen", b =>
+            modelBuilder.Entity("BusinessReports.Domain.Dictionary.Caen", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -38,7 +38,7 @@ namespace BusinessReports.WebApi.Migrations
                     b.ToTable("Caens");
                 });
 
-            modelBuilder.Entity("BusinessReports.Entity.Dictionary.City", b =>
+            modelBuilder.Entity("BusinessReports.Domain.Dictionary.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -59,7 +59,7 @@ namespace BusinessReports.WebApi.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("BusinessReports.Entity.Dictionary.County", b =>
+            modelBuilder.Entity("BusinessReports.Domain.Dictionary.County", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -80,7 +80,7 @@ namespace BusinessReports.WebApi.Migrations
                     b.ToTable("Counties");
                 });
 
-            modelBuilder.Entity("BusinessReports.Entity.Dictionary.Indicator", b =>
+            modelBuilder.Entity("BusinessReports.Domain.Dictionary.Indicator", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -106,7 +106,7 @@ namespace BusinessReports.WebApi.Migrations
                     b.ToTable("Indicators");
                 });
 
-            modelBuilder.Entity("BusinessReports.Entity.Identity.User", b =>
+            modelBuilder.Entity("BusinessReports.Domain.Identity.User", b =>
                 {
                     b.Property<string>("Id");
 
@@ -262,9 +262,9 @@ namespace BusinessReports.WebApi.Migrations
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("BusinessReports.Entity.Dictionary.City", b =>
+            modelBuilder.Entity("BusinessReports.Domain.Dictionary.City", b =>
                 {
-                    b.HasOne("BusinessReports.Entity.Dictionary.County", "County")
+                    b.HasOne("BusinessReports.Domain.Dictionary.County", "County")
                         .WithMany()
                         .HasForeignKey("CountyId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -280,7 +280,7 @@ namespace BusinessReports.WebApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("BusinessReports.Entity.Identity.User")
+                    b.HasOne("BusinessReports.Domain.Identity.User")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -288,7 +288,7 @@ namespace BusinessReports.WebApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("BusinessReports.Entity.Identity.User")
+                    b.HasOne("BusinessReports.Domain.Identity.User")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -301,7 +301,7 @@ namespace BusinessReports.WebApi.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BusinessReports.Entity.Identity.User")
+                    b.HasOne("BusinessReports.Domain.Identity.User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

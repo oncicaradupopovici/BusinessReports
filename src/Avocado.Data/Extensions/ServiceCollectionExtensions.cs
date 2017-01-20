@@ -4,9 +4,10 @@ using Avocado.Data.Repository;
 using System.Reflection;
 using System;
 using System.Linq;
-using Avocado.Entity;
+using Avocado.Domain;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace Avocado.Data.Extensions
 {

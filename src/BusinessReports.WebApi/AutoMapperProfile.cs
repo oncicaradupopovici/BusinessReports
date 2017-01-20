@@ -11,21 +11,21 @@ namespace BusinessReports.WebApi.AutoMapperProfile
     {
         public AutoMapperProfile()
         {
-            CreateMap<Entity.Dictionary.County, Models.Dictionary.County>()
+            CreateMap<Domain.Dictionary.County, Models.Dictionary.County>()
                 .ReverseMap();
-            CreateMap<Entity.Dictionary.County, SelectListItem>();
+            CreateMap<Domain.Dictionary.County, SelectListItem>();
 
-            CreateMap<Entity.Dictionary.City, Models.Dictionary.City>()
+            CreateMap<Domain.Dictionary.City, Models.Dictionary.City>()
                 .ReverseMap();
-            CreateMap<Entity.Dictionary.City, SelectListItem>();
+            CreateMap<Domain.Dictionary.City, SelectListItem>();
 
-            CreateMap<Entity.Dictionary.Caen, Models.Dictionary.Caen>()
+            CreateMap<Domain.Dictionary.Caen, Models.Dictionary.Caen>()
                 .ReverseMap();
-            CreateMap<Entity.Dictionary.Caen, SelectListItem>();
+            CreateMap<Domain.Dictionary.Caen, SelectListItem>();
 
-            CreateMap<Entity.Dictionary.Indicator, Models.Dictionary.Indicator>()
+            CreateMap<Domain.Dictionary.Indicator, Models.Dictionary.Indicator>()
                 .ReverseMap();
-            CreateMap<Entity.Dictionary.Indicator, SelectListItem>();
+            CreateMap<Domain.Dictionary.Indicator, SelectListItem>();
         }
     }
 }

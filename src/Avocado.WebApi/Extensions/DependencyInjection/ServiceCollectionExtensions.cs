@@ -1,5 +1,4 @@
 ﻿using Avocado.Data.Extensions;
-using Avocado.Service.Extensions.DependencyInjection;
 using Avocado.WebApi.ActionFilters;
 using Avocado.WebApi.Formatters;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +13,6 @@ namespace Avocado.WebApi.Extensions.DependencyInjection
         public static void AddAvocado(this IServiceCollection services)
         {
             services.AddAvocadoDataAccess();
-            services.AddAvocadoService();
             services.AddAvocadoWeb();
         }
 

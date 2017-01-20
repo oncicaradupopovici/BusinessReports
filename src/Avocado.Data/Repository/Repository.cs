@@ -1,6 +1,6 @@
 ﻿using Avocado.Core;
 using Avocado.Data.Contracts;
-using Avocado.Entity;
+using Avocado.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;

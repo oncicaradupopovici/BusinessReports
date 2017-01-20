@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using BusinessReports.Entity.Identity;
-using Microsoft.Extensions.Configuration;
 using System.Reflection;
-using BusinessReports.Entity;
-using BusinessReports.Entity.Dictionary;
-using Avocado.Entity;
+using Avocado.Domain;
+using BusinessReports.Domain.Identity;
+using BusinessReports.Domain.Dictionary;
 
 namespace BusinessReports.Data
 {

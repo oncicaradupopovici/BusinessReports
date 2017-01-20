@@ -1,6 +1,6 @@
 ﻿using Avocado.Core;
 using Avocado.WebApi.Models;
-using BusinessReports.Entity.Dictionary;
+using BusinessReports.Domain.Dictionary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
