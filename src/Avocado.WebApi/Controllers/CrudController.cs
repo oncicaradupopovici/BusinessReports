@@ -108,6 +108,21 @@ namespace Avocado.WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpPost("import")]
+        public async Task<IActionResult> ImportAsync([FromBody]IEnumerable<TModel> modelList)
+        {
+            if (modelList == null || !modelList.Any())
+            {
+                return BadRequest();
+            }
+
+            var entityList = _mapper.Map<IEnumerable<TModel>, IEnumerable<TEntity>>(modelList);
+            _crudSvc.Import(entityList);
+            await _crudSvc.SaveAsync();
+
+            return Ok();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(int id, [FromBody]TModel model)
         {

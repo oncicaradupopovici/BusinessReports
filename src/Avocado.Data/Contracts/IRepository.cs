@@ -15,7 +15,9 @@ namespace Avocado.Data.Contracts
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
         void Insert(TEntity entity);
+        void InsertRange(IEnumerable<TEntity> list);
         void Update(TEntity entity);
+        void UpdateRange(IEnumerable<TEntity> list);
         void Delete(int id);
         Task SaveAsync();
     }

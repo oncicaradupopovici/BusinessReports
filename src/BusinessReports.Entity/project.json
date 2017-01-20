@@ -3,6 +3,7 @@
 
   "dependencies": {
     "Avocado.Entity": "1.0.0-*",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
     "NETStandard.Library": "1.6.1",
     "System.ComponentModel.Annotations": "4.3.0-preview1-24530-04"
   },

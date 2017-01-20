@@ -50,6 +50,14 @@ namespace Avocado.Service
             repo.Delete(id);
         }
 
+        public virtual void Import(IEnumerable<TEntity> list)
+        {
+            var newEntities = list.Where(e => e.Id == 0).ToList();
+            var existentEntities = list.Where(e => e.Id != 0).ToList();
+            repo.InsertRange(newEntities);          
+            repo.UpdateRange(existentEntities);
+        }
+
         public async Task SaveAsync()
         {
             await repo.SaveAsync();

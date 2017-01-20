@@ -45,10 +45,20 @@ namespace Avocado.Data.Repository
             _c.Set<TEntity>().Add(entity);
         }
 
+        public void InsertRange(IEnumerable<TEntity> list)
+        {
+            _c.Set<TEntity>().AddRange(list);
+        }
+
         public void Update(TEntity entity)
         {            
             //_c.Update<TEntity>(entity);
             _c.Set<TEntity>().Update(entity);
+        }
+
+        public void UpdateRange(IEnumerable<TEntity> list)
+        {
+            _c.Set<TEntity>().UpdateRange(list);
         }
 
         public virtual void Delete(int id)

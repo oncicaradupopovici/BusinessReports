@@ -17,6 +17,8 @@ namespace Avocado.Service.Contracts
         void Create(TEntity e);
         void Update(TEntity entity);
         void Delete(int id);
+        void Import(IEnumerable<TEntity> list);
         Task SaveAsync();
+
     }
 }
