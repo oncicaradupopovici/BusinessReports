@@ -20,7 +20,5 @@ namespace BusinessReports.WebApi.Models.Dictionary
         public int CountyId { get; set; }
         public string CountyName { get; set; }
 
-        public int CountryId { get; set; }
-        public string CountryName { get; set; }
     }
 }

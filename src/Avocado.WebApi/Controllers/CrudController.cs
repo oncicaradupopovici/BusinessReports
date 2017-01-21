@@ -24,8 +24,8 @@ namespace Avocado.WebApi.Controllers
         where TModel: IModel, IdAccessor, new()
 
     {
-        private IRepository<TEntity> _repository;
-        private IMapper _mapper;
+        protected IRepository<TEntity> _repository;
+        protected IMapper _mapper;
 
         public CrudController(IRepository<TEntity> repository, IMapper mapper)
         {
