@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http'; // not needed
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
@@ -19,7 +19,7 @@ import { DictionariesModule } from './dictionaries/dictionaries.module';
   ],
   imports: [
     BrowserModule,
-    HttpModule,   
+    HttpModule,
     NgbModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
     ToastModule,

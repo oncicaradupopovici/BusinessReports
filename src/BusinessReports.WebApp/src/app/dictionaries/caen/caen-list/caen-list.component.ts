@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -25,7 +25,7 @@ export class CaenListComponent extends BaseListComponent<Caen> {
         super(slimLoadingBarService, modalService, toastr, crudService);
     }
 
-    protected getEditComponentType(): any {
+    protected getEditComponentType(): Function {
         return CaenEditComponent;
     }
 }

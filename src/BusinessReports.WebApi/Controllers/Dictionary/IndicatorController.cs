@@ -12,8 +12,8 @@ namespace BusinessReports.WebApi.Controllers.Api.Dictionary
     [Route("api/indicators", Name = "Indicators")]
     public class IndicatorController : CrudController<Domain.Dictionary.Indicator, Models.Dictionary.Indicator>
     {
-        public IndicatorController(IRepository<Domain.Dictionary.Indicator> crudSvc, IMapper mapper) 
-            : base(crudSvc, mapper)
+        public IndicatorController(IRepository<Domain.Dictionary.Indicator> repository, IMapper mapper) 
+            : base(repository, mapper)
         {
         }
 

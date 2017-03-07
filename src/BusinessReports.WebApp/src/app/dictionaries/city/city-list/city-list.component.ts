@@ -25,7 +25,7 @@ export class CityListComponent extends BaseListComponent<City> {
         super(slimLoadingBarService, modalService, toastr, crudService);
     }
 
-    protected getEditComponentType(): any {
+    protected getEditComponentType(): Function {
         return CityEditComponent;
     }
 }

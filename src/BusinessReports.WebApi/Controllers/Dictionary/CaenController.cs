@@ -12,8 +12,8 @@ namespace BusinessReports.WebApi.Controllers.Api.Dictionary
     [Route("api/caens", Name = "Caens")]
     public class CaenController : CrudController<Domain.Dictionary.Caen, Models.Dictionary.Caen>
     {
-        public CaenController(IRepository<Domain.Dictionary.Caen> crudSvc, IMapper mapper) 
-            : base(crudSvc, mapper)
+        public CaenController(IRepository<Domain.Dictionary.Caen> repository, IMapper mapper) 
+            : base(repository, mapper)
         {
         }
 

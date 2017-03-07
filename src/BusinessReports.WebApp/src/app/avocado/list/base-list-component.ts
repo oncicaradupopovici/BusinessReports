@@ -1,4 +1,4 @@
-﻿import { OnInit } from '@angular/core';
+﻿import { OnInit, HostBinding } from '@angular/core';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -14,7 +14,7 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
     public pageSize: number = 10;
     public page: number = 1;
     public totalCount: number = 0;
-    private searchTerm: string = ''; 
+    private searchTerm: string = '';
 
     constructor(
         protected slimLoadingBarService: SlimLoadingBarService,
@@ -87,7 +87,7 @@ export abstract class BaseListComponent<TModel extends IModel> implements OnInit
         deleteConfirmationComponent.onConfirmDelete.subscribe(x => { this.delete(id) });
     }
 
-    protected abstract getEditComponentType(): any
+    protected abstract getEditComponentType(): Function
 
     private handleApiError(err: ApiError) {
         this.slimLoadingBarService.reset();

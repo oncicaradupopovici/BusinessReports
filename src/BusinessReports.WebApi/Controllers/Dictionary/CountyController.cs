@@ -12,8 +12,8 @@ namespace BusinessReports.WebApi.Controllers.Api.Dictionary
     [Route("api/counties", Name = "Counties")]
     public class CountyController : CrudController<Domain.Dictionary.County, Models.Dictionary.County>
     {
-        public CountyController(IRepository<Domain.Dictionary.County> crudSvc, IMapper mapper) 
-            : base(crudSvc, mapper)
+        public CountyController(IRepository<Domain.Dictionary.County> repository, IMapper mapper) 
+            : base(repository, mapper)
         {
         }
 

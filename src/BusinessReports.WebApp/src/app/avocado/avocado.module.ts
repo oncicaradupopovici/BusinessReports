@@ -18,10 +18,12 @@ import { ListSearchComponent } from './list/list-search/list-search.component';
         ToastModule
     ],
     declarations: [
-        ListDeleteConfirmationComponent,
-        ListSearchComponent
+        ListDeleteConfirmationComponent, ListSearchComponent
     ],
-    exports: [CommonModule, FormsModule, NgbModule, SlimLoadingBarModule, ToastModule, ListDeleteConfirmationComponent, ListSearchComponent],
+    exports: [
+        CommonModule, FormsModule, NgbModule, SlimLoadingBarModule, ToastModule, 
+        ListDeleteConfirmationComponent, ListSearchComponent
+    ],
     entryComponents: [ListDeleteConfirmationComponent],
     providers: [
     ]

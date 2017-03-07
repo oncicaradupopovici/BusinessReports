@@ -24,6 +24,8 @@ namespace BusinessReports.WebApi.Models.Dictionary
         [Required]
         public IndicatorType IndicatorType { get; set; }
 
+        public string IndicatorTypeName { get; set; }
+
         [MaxLength(1000)]
         public string Arguments { get; set; }
 

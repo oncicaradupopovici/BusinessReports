@@ -4,13 +4,9 @@ export class Indicator {
     public name: string;
     public indicatorType: IndicatorType;
     public arguments: string;
+    public indicatorTypeName: string;
 
-    get indicatorTypeName(): string {
-        return IndicatorType[this.indicatorType];
-    }
-
-    constructor(
-    ) {
+    constructor() {
     }
 }
 

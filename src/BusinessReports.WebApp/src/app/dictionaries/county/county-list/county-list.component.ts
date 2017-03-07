@@ -25,7 +25,7 @@ export class CountyListComponent extends BaseListComponent<County> {
         super(slimLoadingBarService, modalService, toastr, crudService);
     }
 
-    protected getEditComponentType(): any {
+    protected getEditComponentType(): Function {
         return CountyEditComponent;
     }
 }

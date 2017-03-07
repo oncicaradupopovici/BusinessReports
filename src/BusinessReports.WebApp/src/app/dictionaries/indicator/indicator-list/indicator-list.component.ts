@@ -25,7 +25,7 @@ export class IndicatorListComponent extends BaseListComponent<Indicator> {
         super(slimLoadingBarService, modalService, toastr, crudService);
     }
 
-    protected getEditComponentType(): any {
+    protected getEditComponentType(): Function {
         return IndicatorEditComponent;
     }
 }
