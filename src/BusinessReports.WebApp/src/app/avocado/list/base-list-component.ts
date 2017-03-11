@@ -8,6 +8,8 @@ import { ListDeleteConfirmationComponent } from './list-delete-confirmation/list
 import { BaseEditComponent } from '../edit/base-edit-component';
 import { BaseCrudService } from '../service/base-crud-service';
 
+declare var $: any;
+
 export abstract class BaseListComponent<TModel extends IModel> implements OnInit {
 
     public list: TModel[];

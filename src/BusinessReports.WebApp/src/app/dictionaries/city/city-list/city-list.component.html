@@ -3,12 +3,12 @@
     <p>Use this section to configure cities.</p>
 
     <div class="row pb-1">
-        <div class="col-xs-6">
+        <div class="col-6">
             <button class="btn btn-outline-success" type="button" (click)="showAdd()">
             <i class="fa fa-plus"></i> Add
         </button>
         </div>
-        <div class="col-xs-6">
+        <div class="col-6">
             <list-search (search)="performSearch($event)"></list-search>
         </div>
     </div>
@@ -39,6 +39,6 @@
         </tbody>
     </table>
 
-    <ngb-pagination [collectionSize]="totalCount" [page]="page" [pageSize]="pageSize" [maxSize]="5" [boundaryLinks]="false" class="text-sm-center"
+    <ngb-pagination [collectionSize]="totalCount" [page]="page" [pageSize]="pageSize" [maxSize]="5" [boundaryLinks]="false" class="d-flex justify-content-center"
         (pageChange)="loadPage($event, true)"></ngb-pagination>
 </article>

@@ -1,5 +1,5 @@
 <div id="main-nav" class="container">
-    <nav class="navbar navbar-static-top navbar-dark bg-inverse">
+    <!--<nav class="navbar navbar-static-top navbar-dark bg-inverse">
         <div class="nav navbar-nav">
             <a class="nav-item nav-link" routerLink="/home" routerLinkActive="active">Home</a>
             <a class="nav-item nav-link" routerLink="/dictionaries" routerLinkActive="active">Dictionaries</a>
@@ -10,6 +10,28 @@
             <input class="form-control form-control-sm" type="text" placeholder="Search">
             <button class="btn btn-sm btn-success" type="submit">Search</button>
         </form>
+    </nav>-->
+
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">Business Reports</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/dictionaries" routerLinkActive="active">Dictionaries</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 hidden-md-down">
+                <input class="form-control form-control-sm" type="text" placeholder="Search">
+                <button class="btn btn-sm btn-success" type="submit">Search</button>
+            </form>
+        </div>
     </nav>
 </div>
 
