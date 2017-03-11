@@ -46,7 +46,7 @@
   },
 
   "scripts": {
-    "prepublish": [ "ng build --prod" ],
+    //"prepublish": [ "ng build --prod" ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
 }
